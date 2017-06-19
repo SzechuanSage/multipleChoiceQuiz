@@ -1,5 +1,6 @@
 # ignored directories
 /node_modules
 /.idea
+/dist
 
 # ignored files
