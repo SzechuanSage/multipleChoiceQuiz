@@ -2,6 +2,7 @@
  * Created by hadgi on 16/06/2017.
  */
 
+/* eslint-env browser */
 const myQuestions = [
   {
     question: 'Who is the strongest?',
@@ -42,28 +43,39 @@ let slides = null;
 let currentSlide = 0;
 
 function buildQuiz() {
-  const output = [];
+  myQuestions.forEach((currentQuestion, questionNumber) => {
+    const slide = document.createElement('div');
+    slide.classList.add('slide');
 
-  myQuestions.forEach(
-    (currentQuestion, questionNumber) => {
-      const answers = [];
+    const question = document.createElement('div');
+    question.classList.add('question');
+    question.textContent = `${currentQuestion.question}`;
+    slide.appendChild(question);
 
-      Object.keys(currentQuestion.answers).forEach((letter) => {
-        answers.push(`<label>
-            <input type="radio" name="question${questionNumber}" value="${letter}">
-            ${letter} :
-            ${currentQuestion.answers[letter]}
-          </label>`);
-      });
+    const answers = document.createElement('div');
+    answers.classList.add('answers');
 
-      output.push(`
-      <div class="slide">
-        <div class="question"> ${currentQuestion.question} </div>
-        <div class="answers"> ${answers.join('')} </div>
-      </div>`);
+    Object.keys(currentQuestion.answers).forEach((letter) => {
+      const answer = document.createElement('div');
+      answer.classList.add('answer');
+
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = `question${questionNumber}`;
+      input.value = letter;
+
+      const label = document.createElement('label');
+      label.textContent = `${letter} : ${currentQuestion.answers[letter]}`;
+
+      answer.appendChild(input);
+      answer.appendChild(label);
+      answers.appendChild(answer);
     });
 
-  quizContainer.innerHTML = output.join('');
+    slide.appendChild(answers);
+
+    quizContainer.appendChild(slide);
+  });
 
   slides = document.querySelectorAll('.slide');
 }

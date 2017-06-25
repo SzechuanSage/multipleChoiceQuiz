@@ -27,7 +27,7 @@ h1 {
     display: inline-block;
 }
 
-.answers label {
+.answer {
     display: block;
     margin-bottom: 10px;
 }
