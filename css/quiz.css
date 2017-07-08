@@ -32,6 +32,14 @@ h1 {
     margin-bottom: 10px;
 }
 
+.correct {
+    color: lightgreen;
+}
+
+.incorrect {
+    color: red;
+}
+
 .slide {
     position: absolute;
     left: 0;
@@ -63,6 +71,14 @@ button {
     padding: 20px;
     cursor: pointer;
     margin-bottom: 20px;
+}
+
+.shownButton {
+    display: inline-block;
+}
+
+.hiddenButton {
+    display: none;
 }
 
 button:hover {

@@ -92,9 +92,11 @@ function showResults() {
 
     if (userAnswer === currentQuestion.correctAnswer) {
       numCorrect += 1;
-      answerContainers[questionNumber].style.color = 'lightgreen';
+      answerContainers[questionNumber].classList.remove('incorrect');
+      answerContainers[questionNumber].classList.add('correct');
     } else {
-      answerContainers[questionNumber].style.color = 'red';
+      answerContainers[questionNumber].classList.remove('correct');
+      answerContainers[questionNumber].classList.add('incorrect');
     }
   });
 
@@ -102,21 +104,31 @@ function showResults() {
   resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
 }
 
+function showButton(button) {
+  button.classList.remove('hiddenButton');
+  button.classList.add('shownButton');
+}
+
+function hideButton(button) {
+  button.classList.remove('shownButton');
+  button.classList.add('hiddenButton');
+}
+
 function showSlide(n) {
   slides[currentSlide].classList.remove('active-slide');
   slides[n].classList.add('active-slide');
   currentSlide = n;
   if (currentSlide === 0) {
-    previousButton.style.display = 'none';
+    hideButton(previousButton);
   } else {
-    previousButton.style.display = 'inline-block';
+    showButton(previousButton);
   }
   if (currentSlide === slides.length - 1) {
-    nextButton.style.display = 'none';
-    submitButton.style.display = 'inline-block';
+    hideButton(nextButton);
+    showButton(submitButton);
   } else {
-    nextButton.style.display = 'inline-block';
-    submitButton.style.display = 'none';
+    hideButton(submitButton);
+    showButton(nextButton);
   }
 }
 
